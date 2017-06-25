@@ -18,13 +18,24 @@ defmodule Warehouse.Web do
 
   def model do
     quote do
-      # Define common model functionality
+      use Ecto.Schema
+
+      import Ecto
+      import Ecto.Changeset
+      import Ecto.Query
+
+      @primary_key {:id, :binary_id, autogenerate: true}
+      @foreign_key_type :binary_id
     end
   end
 
   def controller do
     quote do
       use Phoenix.Controller
+
+      alias Warehouse.Repo
+      import Ecto
+      import Ecto.Query
 
       import Warehouse.Router.Helpers
       import Warehouse.Gettext
@@ -53,6 +64,10 @@ defmodule Warehouse.Web do
   def channel do
     quote do
       use Phoenix.Channel
+
+      alias Warehouse.Repo
+      import Ecto
+      import Ecto.Query
       import Warehouse.Gettext
     end
   end

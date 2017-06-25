@@ -34,7 +34,7 @@ defmodule Warehouse.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_warehouse_key",
-    signing_salt: "yabJtI51"
+    signing_salt: "TIbIhhLD"
 
   plug Warehouse.Router
 end

@@ -10,10 +10,22 @@ kafka:
   links:
     - zookeeper:zk
   environment:
-    KAFKA_ADVERTISED_HOST_NAME: 192.168.99.101
+    KAFKA_ADVERTISED_HOST_NAME: 192.168.99.100
     KAFKA_CREATE_TOPICS: "test:1:1"
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
+
+postgres:
+  image: postgres:alpine
+  ports:
+    - "5432:5432"
+  environment:
+    POSTGRES_PASSWORD: postgres
+
+redis:
+  image: redis:alpine
+  ports:
+    - "6379:6379"
 
 datomic-rest:
   build: datomic-rest

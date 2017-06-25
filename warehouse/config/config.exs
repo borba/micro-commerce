@@ -5,10 +5,14 @@
 # is restricted to this project.
 use Mix.Config
 
+# General application configuration
+config :warehouse,
+  ecto_repos: [Warehouse.Repo]
+
 # Configures the endpoint
 config :warehouse, Warehouse.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "wINI/oT8He0b8Hhter69RbDoSl1tpJok/kI2Gjzxq4jyVezv/RahNM/Lz/2g0y/A",
+  secret_key_base: "3rtL19T0MxUoP+lTQ4nor8ukyQtAJeFCWybjB57ETrKcDIG5HeIZSpJFPGQMrHHs",
   render_errors: [view: Warehouse.ErrorView, accepts: ~w(json)],
   pubsub: [name: Warehouse.PubSub,
            adapter: Phoenix.PubSub.PG2]
@@ -18,9 +22,13 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+# Configure phoenix generators
+config :phoenix, :generators,
+  binary_id: true
+
 # Configures Kafka_Ex
 config :kafka_ex,
-  brokers: [{"192.168.99.101", 9092}],
+  brokers: [{"192.168.99.100", 9092}],
   consumer_group: "warehouse",
   disable_default_worker: false,
   use_ssl: false,

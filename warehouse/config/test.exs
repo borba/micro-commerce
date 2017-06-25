@@ -8,3 +8,12 @@ config :warehouse, Warehouse.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+# Configure your database
+config :warehouse, Warehouse.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: "postgres",
+  password: "postgres",
+  database: "warehouse_test",
+  hostname: "192.168.99.100",
+  pool: Ecto.Adapters.SQL.Sandbox

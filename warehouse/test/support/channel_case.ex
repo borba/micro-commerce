@@ -20,6 +20,11 @@ defmodule Warehouse.ChannelCase do
       # Import conveniences for testing with channels
       use Phoenix.ChannelTest
 
+      alias Warehouse.Repo
+      import Ecto
+      import Ecto.Changeset
+      import Ecto.Query
+
 
       # The default endpoint for testing
       @endpoint Warehouse.Endpoint
@@ -27,6 +32,11 @@ defmodule Warehouse.ChannelCase do
   end
 
   setup tags do
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Warehouse.Repo)
+
+    unless tags[:async] do
+      Ecto.Adapters.SQL.Sandbox.mode(Warehouse.Repo, {:shared, self()})
+    end
 
     :ok
   end

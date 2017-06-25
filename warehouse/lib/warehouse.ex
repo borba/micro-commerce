@@ -8,6 +8,8 @@ defmodule Warehouse do
 
     # Define workers and child supervisors to be supervised
     children = [
+      # Start the Ecto repository
+      supervisor(Warehouse.Repo, []),
       # Start the endpoint when the application starts
       supervisor(Warehouse.Endpoint, []),
       # Start your own worker by calling: Warehouse.Worker.start_link(arg1, arg2, arg3)

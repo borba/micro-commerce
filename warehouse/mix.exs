@@ -9,6 +9,7 @@ defmodule Warehouse.Mixfile do
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     aliases: aliases(),
      deps: deps()]
   end
 
@@ -17,7 +18,8 @@ defmodule Warehouse.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Warehouse, []},
-     applications: [:phoenix, :phoenix_pubsub, :cowboy, :logger, :gettext, :httpoison, :kafka_ex]]
+     applications: [:phoenix, :phoenix_pubsub, :cowboy, :logger, :gettext,
+                    :phoenix_ecto, :postgrex, :httpoison, :kafka_ex]]
   end
 
   # Specifies which paths to compile per environment.
@@ -30,11 +32,25 @@ defmodule Warehouse.Mixfile do
   defp deps do
     [{:phoenix, "~> 1.2.4"},
      {:phoenix_pubsub, "~> 1.0"},
+     {:phoenix_ecto, "~> 3.0"},
+     {:postgrex, ">= 0.0.0"},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:datomex, git: "https://github.com/borba/datomex.git"},
      {:httpoison, "~> 0.11.1"},
      {:exdn, "~> 2.1"},
      {:kafka_ex, "~> 0.6.5"}]
+  end
+
+  # Aliases are shortcuts or tasks specific to the current project.
+  # For example, to create, migrate and run the seeds file at once:
+  #
+  #     $ mix ecto.setup
+  #
+  # See the documentation for `Mix` for more info on aliases.
+  defp aliases do
+    ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+     "ecto.reset": ["ecto.drop", "ecto.setup"],
+     "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
   end
 end
