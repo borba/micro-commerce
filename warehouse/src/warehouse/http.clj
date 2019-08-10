@@ -1,4 +1,4 @@
-(ns warehouse.core
+(ns warehouse.http
   (:require [clojure.pprint :refer [pprint]]))
 
 (def plain-text-header
@@ -32,7 +32,7 @@
   [req]
   {:status 200
    :headers plain-text-header
-   :body "oi" #_(with-out-str (pprint req))})
+   :body (with-out-str (pprint req))})
 
 (def routes ["/" {""                  {:get greet}
                   "goodbye"           {:get goodbye}

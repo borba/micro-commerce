@@ -1,9 +1,17 @@
 (ns warehouse.application
-  (:require [integrant.core :as ig]
-            [warehouse.config :refer [config]]))
+  (:require [http.server.lifecycle]
+            [integrant.core :as ig]
+            [ring.logger :as logger]
+            [warehouse.http :as http]))
+
+(def config
+  {:http/handler           {:routes   http/routes
+                            :wrappers [logger/wrap-with-logger]}
+   :http/server            {:port    8000
+                            :handler (ig/ref :http/handler)}})
 
 (defn create-system
-  [config]
+  []
   (ig/init config))
 
 (defn destroy-system
@@ -12,4 +20,4 @@
 
 (defn -main
   []
-  (create-system config))
+  (create-system))

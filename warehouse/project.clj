@@ -9,15 +9,18 @@
 
   :dependencies [[org.clojure/clojure "1.10.1"]
 
-                 [aero "1.1.3"]
                  [aleph "0.4.7-alpha5"]
                  [bidi "2.1.6"]
                  [integrant "0.7.0"]
-                 [ring "1.7.1"]]
+                 [ring "1.7.1"]
+                 [ring-logger "1.0.1"]]
 
-  :injections [(require '[debug.tools :refer :all])]
+  :injections [(require '[debug.tools :refer :all]
+                        '[user :refer :all])]
+
+  :main warehouse.application
 
   :profiles {:dev {:source-paths ["dev"]
-                   :dependencies [[org.clojure/core.async "0.4.500"]
-                                  [org.clojure/tools.namespace "0.3.0"]
+                   :main user/start!
+                   :dependencies [[org.clojure/tools.namespace "0.3.1"]
                                   [mvxcvi/puget "1.1.2"]]}})

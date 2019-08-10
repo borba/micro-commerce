@@ -1,22 +1,18 @@
 (ns user
-  (:require [clojure.core.async :refer [<! go-loop timeout]]
-            [clojure.tools.namespace.repl :refer [refresh refresh-all]]
-            [warehouse.application :as application]
-            [warehouse.config :refer [config]]))
+  (:require [clojure.tools.namespace.repl :refer [refresh]]
+            [warehouse.application :as application]))
 
-(def system (atom nil))
+(def ^:private system (atom nil))
 
-(defn start
-  "Starts the current development system."
+(defn start!
   []
-  (reset! system (application/create-system config)))
+  (reset! system (application/create-system)))
 
-(defn stop
-  "Shuts down and destroys the current development system."
+(defn stop!
   []
   (swap! system (fn [s] (when s (application/destroy-system s) nil))))
 
-(defn restart
+(defn restart!
   []
-  (stop)
-  (refresh :after 'user/start))
+  (stop!)
+  (refresh :after 'user/start!))

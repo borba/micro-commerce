@@ -1,6 +1,6 @@
 (ns warehouse.core-test
   (:require [clojure.test :refer :all]
-            [warehouse.core :refer :all]))
+            [warehouse.http :refer :all]))
 
 (deftest a-test
   (testing "FIXME, I fail."
