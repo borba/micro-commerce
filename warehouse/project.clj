@@ -18,7 +18,6 @@
   :main warehouse.application
 
   :profiles {:dev {:source-paths ["dev"]
-                   :main user/start!
                    :injections [(require '[debug.tools :as debug])]
                    :dependencies [[org.clojure/tools.namespace "0.3.1"]
                                   [mvxcvi/puget "1.1.2"]]
