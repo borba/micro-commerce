@@ -15,12 +15,11 @@
                  [ring "1.7.1"]
                  [ring-logger "1.0.1"]]
 
-  :injections [(require '[debug.tools :refer :all]
-                        '[user :refer :all])]
-
   :main warehouse.application
 
   :profiles {:dev {:source-paths ["dev"]
                    :main user/start!
+                   :injections [(require '[debug.tools :as debug])]
                    :dependencies [[org.clojure/tools.namespace "0.3.1"]
-                                  [mvxcvi/puget "1.1.2"]]}})
+                                  [mvxcvi/puget "1.1.2"]]
+                   :repl-options {:init-ns user}}})
